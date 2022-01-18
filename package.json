@@ -1,0 +1,23 @@
+{
+  "name": "cypressts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
+  },
+  "author": "sonalpawar",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^27.4.0",
+    "cypress": "^9.2.1",
+    "typescript": "^4.5.4"
+  },
+  "dependencies": {
+    "@testing-library/cypress": "^8.0.2",
+    "complete-randomer": "^1.9.1",
+    "cross-env-file": "^1.0.0"
+  }
+}
