@@ -25,6 +25,7 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 import "@testing-library/cypress/add-commands"
+import cypress from "cypress"
 
 declare namespace Cypress {
     interface Chainable<Subject> {
@@ -33,5 +34,3 @@ declare namespace Cypress {
   }
 
 Cypress.Commands.add('acceptCookies', () => cy.get('#onetrust-accept-btn-handler').click())
-
-

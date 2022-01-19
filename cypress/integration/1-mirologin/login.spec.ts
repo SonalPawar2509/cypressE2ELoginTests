@@ -7,22 +7,14 @@ import { loginpagelocators } from "../helpers/loginpagelocators";
 
 describe('test suite', () => {
     beforeEach(() => {
-        //cy.visit(Cypress.env("BASE_URL"));
-        cy.visit(Cypress.env("BASE_URL"), {
-            onBeforeLoad(win) {
-              Object.defineProperty(win.navigator, 'language', { value: 'de-DE' });
-              Object.defineProperty(win.navigator, 'languages', { value: ['de'] });
-              Object.defineProperty(win.navigator, 'accept_languages', { value: ['de'] });
-            },
-            headers: {
-              'Accept-Language': 'de',
-            },
-
-        });
+        cy.visit(Cypress.env("BASE_URL"));
     })
 
     it('Miro Login test suite',  () => {
         loginpagelocators.loginAsUser()
+        cy.get('.List--1r2wrpd > :nth-child(4) > .Button--1qfp3li > .Box--8euad8').click();
+        cy.wait(5000);
+
         cy.findByText(loginpagelocators.submitBtnTxt)
         cy.get(loginpagelocators.userNameTxtbox).type('sonal pawar');
         const randomEmail = randomer.EMAIL.SINGLE('Outlook')
@@ -46,6 +38,10 @@ describe('test suite', () => {
 
     it('Miro Login test using existing Email', () => {
         loginpagelocators.loginAsUser()
+        cy.get('.List--1r2wrpd > :nth-child(4) > .Button--1qfp3li > .Box--8euad8').click();
+        cy.wait(5000);
+
+        
         console.log(process.env.randomEmail)
         cy.get(loginpagelocators.userNameTxtbox).type('sonal pawar');
         cy.get(loginpagelocators.emailTxtbox).type(process.env.randomEmail);
