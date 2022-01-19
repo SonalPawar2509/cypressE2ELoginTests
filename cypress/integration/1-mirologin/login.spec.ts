@@ -7,7 +7,18 @@ import { loginpagelocators } from "../helpers/loginpagelocators";
 
 describe('test suite', () => {
     beforeEach(() => {
-        cy.visit(Cypress.env("BASE_URL"));
+        //cy.visit(Cypress.env("BASE_URL"));
+        cy.visit(Cypress.env("BASE_URL"), {
+            onBeforeLoad(win) {
+              Object.defineProperty(win.navigator, 'language', { value: 'de-DE' });
+              Object.defineProperty(win.navigator, 'languages', { value: ['de'] });
+              Object.defineProperty(win.navigator, 'accept_languages', { value: ['de'] });
+            },
+            headers: {
+              'Accept-Language': 'de',
+            },
+
+        });
     })
 
     it('Miro Login test suite',  () => {
