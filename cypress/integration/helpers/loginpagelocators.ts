@@ -15,8 +15,8 @@ export class loginpagelocators{
 
     static submitBtn = '[data-testid=mr-form-signup-btn-start-1]'
 
-    static submitBtnTxt = 'Get started now'
-
+    static submitBtnTxt = 'Jetzt anfangen'
+   
     static txtCheckYourEmail = 'Überprüfen Sie Ihre E-Mail'
 
     static emailErrorMessage = 'Tut uns Leid, diese E-Mail ist bereits registriert'
