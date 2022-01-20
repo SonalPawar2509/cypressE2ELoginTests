@@ -34,3 +34,7 @@ declare namespace Cypress {
   }
 
 Cypress.Commands.add('acceptCookies', () => cy.get('#onetrust-accept-btn-handler').click())
+
+Cypress.on('uncaught:exception', (err, runnable) => {
+   return false
+})
