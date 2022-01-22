@@ -1,6 +1,7 @@
 {
     "env": {
         "BASE_URL": "https://miro.com/de/",
-        "Existing_USERNAME": "sonal.bhosale.h@gmail.com"
-    }
+        "LOGIN_URL": "https://miro.com/login/"
+    },
+    "testFiles": "**/*spec.{ts,tsx}"
 }

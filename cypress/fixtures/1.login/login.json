@@ -1,0 +1,10 @@
+{
+  "userName": "sonal pawar",
+  "password": "MiroPasswordIsGood",
+  "email_domain": "Outlook",
+  "passwords": {
+    "weak": "asdfghjk",
+    "medium": "asdfghjksdasd",
+    "good": "Asdgflkasfjha"
+  }
+}

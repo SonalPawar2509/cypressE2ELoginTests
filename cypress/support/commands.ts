@@ -27,12 +27,7 @@
 import "@testing-library/cypress/add-commands"
 import cypress from "cypress"
 
-declare namespace Cypress {
-    interface Chainable<Subject> {
-        acceptCookies: () => void
-    }
-  }
-
+// @ts-ignore
 Cypress.Commands.add('acceptCookies', () => cy.get('#onetrust-accept-btn-handler').click())
 
 Cypress.on('uncaught:exception', (err, runnable) => {
