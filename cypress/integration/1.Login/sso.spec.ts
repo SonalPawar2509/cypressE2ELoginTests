@@ -8,6 +8,8 @@ import {
     gmailButton, ms365Button,
     signUpButton, slackButton, ssoProceedWithRegistrationButton, ssoTosCheckbox
 } from "./login.objects";
+import presets from "../../helpers/presets";
+import ViewportPreset = Cypress.ViewportPreset;
 
 
 describe('Miro Login SSO Navigation Test Suite', () => {
@@ -15,44 +17,58 @@ describe('Miro Login SSO Navigation Test Suite', () => {
         cy.visit(Cypress.env("BASE_URL"));
     })
 
-    it('1.Miro Gmail SSO Test',  () => {
-        acceptCookies();
-        signUpButton().click();
-        gmailButton().click();
-        ssoTosCheckbox().click({force:true});
-        ssoProceedWithRegistrationButton().should('exist');
+    presets.forEach((device: ViewportPreset, index) => {
+        it(`1-${index}.Miro Gmail SSO Test: on ${device}`,  () => {
+            cy.viewport(device);
+            acceptCookies();
+            signUpButton().click();
+            gmailButton().click();
+            ssoTosCheckbox().click({force:true});
+            ssoProceedWithRegistrationButton().should('exist');
+        });
     });
 
-    it('2.Miro Slack SSO Test',  () => {
-        acceptCookies();
-        signUpButton().click();
-        slackButton().click();
-        ssoTosCheckbox().click({force:true});
-        ssoProceedWithRegistrationButton().should('exist');
+    presets.forEach((device: ViewportPreset, index) => {
+        it(`2-${index}.Miro Slack SSO Test: on ${device}`,  () => {
+            cy.viewport(device);
+            acceptCookies();
+            signUpButton().click();
+            slackButton().click();
+            ssoTosCheckbox().click({force:true});
+            ssoProceedWithRegistrationButton().should('exist');
+        });
     });
 
-    it('3.Miro MS 365 SSO Test',  () => {
-        acceptCookies();
-        signUpButton().click();
-        ms365Button().click();
-        ssoTosCheckbox().click({force:true});
-        ssoProceedWithRegistrationButton().should('exist');
+    presets.forEach((device: ViewportPreset, index) => {
+        it(`3-${index}.Miro MS 365 SSO Test: on ${device}`,  () => {
+            cy.viewport(device);
+            acceptCookies();
+            signUpButton().click();
+            ms365Button().click();
+            ssoTosCheckbox().click({force:true});
+            ssoProceedWithRegistrationButton().should('exist');
+        });
     });
 
-    it('4.Miro Apple SSO Test',  () => {
-        acceptCookies();
-        signUpButton().click();
-        appleButton().click();
-        ssoTosCheckbox().click({force:true});
-        ssoProceedWithRegistrationButton().should('exist');
+    presets.forEach((device: ViewportPreset, index) => {
+        it(`4-${index}.Miro Apple SSO Test: on ${device}`,  () => {
+            cy.viewport(device);
+            acceptCookies();
+            signUpButton().click();
+            appleButton().click();
+            ssoTosCheckbox().click({force:true});
+            ssoProceedWithRegistrationButton().should('exist');
+        });
     });
 
-    it('4.Miro facebook SSO Test',  () => {
-        acceptCookies();
-        signUpButton().click();
-        facebookButton().click();
-        ssoTosCheckbox().click({force:true});
-        ssoProceedWithRegistrationButton().should('exist');
+    presets.forEach((device: ViewportPreset, index) => {
+        it(`4-${index}.Miro facebook SSO Test: on ${device}`,  () => {
+            acceptCookies();
+            signUpButton().click();
+            facebookButton().click();
+            ssoTosCheckbox().click({force:true});
+            ssoProceedWithRegistrationButton().should('exist');
+        });
     });
 });
 

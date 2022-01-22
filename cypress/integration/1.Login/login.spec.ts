@@ -14,6 +14,8 @@ import {
 import loginLocators from './login.locators';
 import {checkYourEmailText} from "../2.CheckEmailPage/CheckEmail.object";
 import {doFormSignup} from "./login.actions";
+import presets from "../../helpers/presets";
+import ViewportPreset = Cypress.ViewportPreset;
 
 
 describe('Miro Login Test Suite', () => {
@@ -21,83 +23,103 @@ describe('Miro Login Test Suite', () => {
         cy.visit(Cypress.env("BASE_URL"));
     })
 
-    it('1.Miro Login test suite',  () => {
-        cy.fixture('1.login/login.json').then((loginFixture) => {
-            acceptCookies();
-            signUpButton().click();
+    presets.forEach((device: ViewportPreset, index) => {
+        it(`1-${index}.Miro Login test suite: on ${device}`,  () => {
+            cy.fixture('1.login/login.json').then((loginFixture) => {
+                cy.viewport(device);
+                acceptCookies();
+                signUpButton().click();
 
-            const randomEmail = randomer.EMAIL.SINGLE(loginFixture.email_domain)
-            process.env['randomEmail'] = randomEmail
+                const randomEmail = randomer.EMAIL.SINGLE(loginFixture.email_domain)
+                process.env['randomEmail'] = randomEmail
 
-            doFormSignup(loginFixture.userName, randomEmail, loginFixture.password);
+                doFormSignup(loginFixture.userName, randomEmail, loginFixture.password);
 
-            checkYourEmailText();
-            checkYourEmailText().should('have.text', checkEmailLocators.checkYourEmailText);
+                checkYourEmailText();
+                checkYourEmailText().should('have.text', checkEmailLocators.checkYourEmailText);
+            });
         });
     });
 
-    it('2. Should throw an error while signup for existing user', () => {
-        cy.fixture('1.login/login.json').then((loginFixture) => {
-            acceptCookies();
-            signUpButton().click();
+    presets.forEach((device: ViewportPreset, index) => {
+        it(`2-${index}. Should throw an error while signup for existing user: on ${device}`, () => {
+            cy.fixture('1.login/login.json').then((loginFixture) => {
+                cy.viewport(device);
+                acceptCookies();
+                signUpButton().click();
 
-            doFormSignup(loginFixture.userName, process.env.randomEmail || '', loginFixture.password);
+                doFormSignup(loginFixture.userName, process.env.randomEmail || '', loginFixture.password);
 
-            errorMessageDuplicateEmail().should('exist');
+                errorMessageDuplicateEmail().should('exist');
+            });
         });
     });
 
-    it('3. Should show message on weak password', () => {
-        cy.fixture('1.login/login.json').then((loginFixture) => {
-            console.log(loginFixture)
-            acceptCookies();
-            signUpButton().click();
+    presets.forEach((device: ViewportPreset, index) => {
+        it(`3-${index}. Should show message on weak password: on ${device}`, () => {
+            cy.fixture('1.login/login.json').then((loginFixture) => {
+                cy.viewport(device);
+                acceptCookies();
+                signUpButton().click();
 
-            const randomEmail = randomer.EMAIL.SINGLE(loginFixture.email_domain)
+                const randomEmail = randomer.EMAIL.SINGLE(loginFixture.email_domain)
 
-            doFormSignup(loginFixture.userName, randomEmail, loginFixture.passwords.weak, false);
+                doFormSignup(loginFixture.userName, randomEmail, loginFixture.passwords.weak, false);
 
-            infoMessageWeakPassword().should('exist');
+                infoMessageWeakPassword().should('exist');
+            });
         });
     });
 
-    it('4. Should show message on medium password', () => {
-        cy.fixture('1.login/login.json').then((loginFixture) => {
-            acceptCookies();
-            signUpButton().click();
+    presets.forEach((device: ViewportPreset, index) => {
+        it(`4-${index}. Should show message on medium password: on ${device}`, () => {
+            cy.fixture('1.login/login.json').then((loginFixture) => {
+                cy.viewport(device);
+                acceptCookies();
+                signUpButton().click();
 
-            const randomEmail = randomer.EMAIL.SINGLE(loginFixture.email_domain)
-            doFormSignup(loginFixture.userName, randomEmail, loginFixture.passwords.medium, false);
+                const randomEmail = randomer.EMAIL.SINGLE(loginFixture.email_domain)
+                doFormSignup(loginFixture.userName, randomEmail, loginFixture.passwords.medium, false);
 
-            infoMessageMediumPassword().should('exist');
+                infoMessageMediumPassword().should('exist');
+            });
         });
     });
 
-    it('5. Should show message on good password', () => {
-        cy.fixture('1.login/login.json').then((loginFixture) => {
-            acceptCookies();
-            signUpButton().click();
+    presets.forEach((device: ViewportPreset, index) => {
+        it(`5-${index}. Should show message on good password: on ${device}`, () => {
+            cy.fixture('1.login/login.json').then((loginFixture) => {
+                cy.viewport(device);
+                acceptCookies();
+                signUpButton().click();
 
-            const randomEmail = randomer.EMAIL.SINGLE(loginFixture.email_domain)
-            doFormSignup(loginFixture.userName, randomEmail, loginFixture.passwords.good, false);
+                const randomEmail = randomer.EMAIL.SINGLE(loginFixture.email_domain)
+                doFormSignup(loginFixture.userName, randomEmail, loginFixture.passwords.good, false);
 
-            infoMessageGoodPassword().should('exist');
+                infoMessageGoodPassword().should('exist');
+            });
         });
     });
 
-    it('6. Should contain miro app logo on signup page', () => {
-        acceptCookies();
-        signUpButton().click();
-        miroLogo().should('exist');
+    presets.forEach((device: ViewportPreset, index) => {
+        it(`6-${index}. Should contain miro app logo on signup page: on ${device}`, () => {
+            cy.viewport(device);
+            acceptCookies();
+            signUpButton().click();
+            miroLogo().should('exist');
+        });
     });
 
-    it('7. Should redirect on login button click', () => {
-        acceptCookies();
-        signUpButton().click();
-        loginButton().should('exist');
-        loginButton().contains(loginLocators.loginButtonText);
-        loginButton().click();
-        cy.url().should('eq', Cypress.env("LOGIN_URL"));
+    presets.forEach((device: ViewportPreset, index) => {
+        it(`7-${index}. Should redirect on login button click: on ${device}`, () => {
+            cy.viewport(device);
+            acceptCookies();
+            signUpButton().click();
+            loginButton().should('exist');
+            loginButton().contains(loginLocators.loginButtonText);
+            loginButton().click();
+            cy.url().should('eq', Cypress.env("LOGIN_URL"));
+        });
     });
 });
 
