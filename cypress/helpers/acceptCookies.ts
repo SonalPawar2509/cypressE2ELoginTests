@@ -1,5 +1,5 @@
 const acceptCookies = () : void => {
-    cy.waitFor(5000);
+    cy.waitFor(10000);
     cy.acceptCookies();
 };
 
