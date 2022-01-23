@@ -47,7 +47,7 @@ describe('Miro Login SSO Navigation Test Suite', () => {
         ssoProceedWithRegistrationButton().should('exist');
     });
 
-    it('4.Miro facebook SSO Test',  () => {
+    it('5.Miro facebook SSO Test',  () => {
         acceptCookies();
         signUpButton().click();
         facebookButton().click();
